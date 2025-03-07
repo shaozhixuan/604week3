@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>My Diary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        #diaryContainer {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #entryInput {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delete-btn {
+            background-color: #ff4444;
+            margin-left: 15px;
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="diaryContainer">
+        <h1>My Diary</h1>
+        <textarea 
+            id="entryInput" 
+            placeholder="Write your diary entry here..."
+        ></textarea>
+        
+        <div class="button-group">
+            <button onclick="addEntry()">Add Entry</button>
+            <button onclick="clearAll()" class="delete-btn">Clear All Entries</button>
+        </div>
+
+        <div id="entriesList"></div>
+    </div>
+
+    <script>
+        // 初始化时加载存储的条目
+        let entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+        renderEntries();
+
+        function addEntry() {
+            const input = document.getElementById('entryInput');
+            const content = input.value.trim();
+            
+            if (!content) {
+                alert('Please write something before adding!');
+                return;
+            }
+
+            const newEntry = {
+                id: Date.now(),
+                content: content,
+                date: new Date().toLocaleString()
+            };
+
+            entries.push(newEntry);
+            saveToLocalStorage();
+            renderEntries();
+            input.value = '';
+        }
+
+        function deleteEntry(id) {
+            entries = entries.filter(entry => entry.id !== id);
+            saveToLocalStorage();
+            renderEntries();
+        }
+
+        function clearAll() {
+            if (confirm('Are you sure you want to delete ALL entries?')) {
+                entries = [];
+                saveToLocalStorage();
+                renderEntries();
+            }
+        }
+
+        function renderEntries() {
+            const container = document.getElementById('entriesList');
+            container.innerHTML = entries.map(entry => `
+                <div class="entry">
+                    <div>
+                        <div style="color: #666; font-size: 0.9em">${entry.date}</div>
+                        <div style="margin-top: 5px">${entry.content}</div>
+                    </div>
+                    <button 
+                        class="delete-btn" 
+                        onclick="deleteEntry(${entry.id})"
+                    >
+                        Delete
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('diaryEntries', JSON.stringify(entries));
+        }
+    </script>
+</body>
+</html>

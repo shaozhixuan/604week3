@@ -1,0 +1,58 @@
+[
+    {
+        "ID": 1,
+        "Name": "John Doe",
+        "Age": 30,
+        "Department": "Engineering",
+        "Skills": ["JavaScript", "React", "Node.js"],
+        "Is Manager?": "No"
+    },
+    {
+        "ID": 2,
+        "Name": "Jane Smith",
+        "Age": 28,
+        "Department": "Marketing",
+        "Skills": ["SEO", "Content Writing", "Analytics"],
+        "Is Manager?": "Yes"
+    },
+    {
+        "ID": 3,
+        "Name": "Sam Wilson",
+        "Age": 35,
+        "Department": "Sales",
+        "Skills": ["Negotiation", "CRM", "Public Speaking"],
+        "Is Manager?": "No"
+    },
+    {
+        "ID": 4,
+        "Name": "Emily Brown",
+        "Age": 32,
+        "Department": "HR",
+        "Skills": ["Recruitment", "Employee Relations"],
+        "Is Manager?": "Yes"
+    },
+    {
+        "ID": 5,
+        "Name": "Mike Johnson",
+        "Age": 40,
+        "Department": "Finance",
+        "Skills": ["Accounting", "Tax Planning"],
+        "Is Manager?": "No"
+    },
+    {
+        "ID": 6,
+        "Name": "Lisa Wang",
+        "Age": 27,
+        "Department": "Design",
+        "Skills": ["UI/UX", "Figma", "Illustrator"],
+        "Is Manager?": "No"
+    },
+    {
+        "ID": 7,
+        "Name": "Alex Turner",
+        "Age": 38,
+        "Department": "Engineering",
+        "Skills": ["Python", "Django", "AWS"],
+        "Is Manager?": "Yes"
+    }
+]
